@@ -1,0 +1,101 @@
+---
+output: github_document
+---
+
+<!-- README.md is generated from README.Rmd. Please edit that file -->
+
+```{r, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>",
+  fig.path = "man/figures/README-",
+  out.width = "100%"
+)
+```
+
+# assign4
+
+<!-- badges: start -->
+<!-- badges: end -->
+
+The goal of assign4 is to ...
+
+## Installation
+
+You can install the development version of assign4 from [GitHub](https://github.com/) with:
+
+``` r
+# install.packages("pak")
+pak::pak("ETC5523-2024/assignment-4-packages-and-shiny-apps-xiaoranzhong0924")
+```
+
+## Example
+
+This is a basic example which shows you how to solve a common problem:
+
+```{r example}
+library(assign4)
+```
+
+What is special about using `README.Rmd` instead of just `README.md`? You can include R chunks like so:
+
+```{r cars}
+usethis::use_mit_license("Xiaoran Zhong")
+```
+
+You'll still need to render `README.Rmd` regularly, to keep `README.md` up-to-date. `devtools::build_readme()` is handy for this.
+
+You can also embed plots, for example:
+
+```{r pressure, echo = FALSE}
+plot(pressure)
+```
+
+In that case, don't forget to commit and push the resulting figure files, so they display on GitHub and CRAN.
+```{r}
+# Create the inst/shiny-app folder
+usethis::use_directory("inst/shiny-app")
+
+# Inside inst/shiny-app, create ui.R and server.R for your Shiny app.
+
+#' Launch the Shiny App
+#'
+#' @export
+launch_shiny_app <- function() {
+  app_dir <- system.file("shiny-app", package = "assign4")
+  shiny::runApp(app_dir, display.mode = "normal")
+}
+```
+
+```{r}
+# Create the data-raw folder
+usethis::use_data_raw()
+
+# Write your data cleaning script inside data-raw
+```
+```{r}
+# Create a vignette template
+usethis::use_vignette("explore-assign4")
+
+```
+
+```{r}
+#' Launch the Shiny App for Data Exploration
+#'
+#' This function launches a Shiny app included in the package that allows users
+#' to interactively explore the dataset.
+#'
+#' @export
+launch_shiny_app <- function() {
+  app_dir <- system.file("shiny-app", package = "assign4")
+  shiny::runApp(app_dir, display.mode = "normal")
+}
+```
+
+```{r}
+# Generate roxygen2 documentation
+devtools::document()
+```
+
+
+

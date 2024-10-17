@@ -1,0 +1,27 @@
+Package: assign4
+Title: Analysis of U.S. Federal Holidays
+Version: 0.0.1
+Authors@R: 
+    person("Cristina", "Zhong", email = "xzho0140@student.monash.edu", role = c("aut", "cre"),
+           comment = c(ORCID = "YOUR-ORCID-ID"))
+Description: This package provides tools for analyzing the historical evolution and trends in U.S. federal holidays, including proposals for new holidays.
+License: MIT + file LICENSE
+Encoding: UTF-8
+Roxygen: list(markdown = TRUE)
+RoxygenNote: 7.3.2
+Depends: 
+    R (>= 2.10)
+Imports:
+    tidytuesdayR,
+    tidyverse,
+    janitor,
+    rvest,
+    polite,
+    lubridate
+LazyData: true
+Suggests: 
+    knitr,
+    rmarkdown,
+    ggplot2,
+    testthat
+VignetteBuilder: knitr

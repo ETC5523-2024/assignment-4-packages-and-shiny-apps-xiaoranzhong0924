@@ -1,0 +1,93 @@
+---
+title: "Exploring U.S. Federal Holidays Package"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{Exploring U.S. Federal Holidays Package}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE, warning = FALSE, message = FALSE)
+```
+
+### Introduction
+
+This vignette provides an overview of the U.S. Federal Holidays package, exploring its features and how to use it for analyzing trends in federal holidays and proposals for new ones.
+
+### Loading Data
+
+We first load the data using the tidytuesdayR package:
+
+```{r}
+library(tidytuesdayR)
+tuesdata <- tidytuesdayR::tt_load('2024-06-18')
+federal_holidays <- tuesdata$federal_holidays
+proposed_federal_holidays <- tuesdata$proposed_federal_holidays
+```
+
+### Data Cleaning and Preparation
+
+We clean and prepare the data using the tidyverse and janitor packages:
+
+```{r}
+library(tidyverse)
+library(janitor)
+
+federal_holidays <- federal_holidays %>%
+  janitor::clean_names() %>%
+  mutate(year_established = as.integer(year_established))
+```
+
+### Analyzing Established Holidays
+
+Visualize the timeline of U.S. federal holidays:
+
+```{r}
+library(ggplot2)
+
+ggplot(federal_holidays, aes(x = year_established, y = reorder(official_name, year_established))) +
+  geom_point(color = "blue", size = 3) +
+  labs(
+    title = "Establishment of U.S. Federal Holidays",
+    x = "Year Established",
+    y = "Holiday"
+  ) +
+  theme_minimal()
+```
+
+### Analyzing Proposed Holidays
+
+Explore the distribution of proposed holidays:
+
+```{r}
+proposed_holidays <- proposed_federal_holidays %>%
+  mutate(month = lubridate::month(date, label = TRUE)) %>%
+  count(month)
+
+ggplot(proposed_holidays, aes(x = month, y = n)) +
+  geom_bar(stat = "identity", fill = "steelblue") +
+  labs(title = "Distribution of Proposed Federal Holidays by Month",
+       x = "Month", y = "Count") +
+  theme_minimal()
+```
+
+### Conclusion
+
+The vignette demonstrates how to use the package to explore the evolution and proposals of U.S. federal holidays, reflecting cultural and societal trends.
+
+#### Steps to Follow:
+
+1. **Create and Edit the Vignette**: Use `usethis::use_vignette("explore-your-package")` to create the vignette file. Then, edit it with the content above.
+
+2. **Build Vignettes**: Run `devtools::build_vignettes()` to build the vignette.
+
+3. **Check Vignettes**: Use `browseVignettes(package = "yourpackage")` to view the vignette and ensure it displays correctly.
+
+This structure provides a comprehensive guide for users to explore your package's functionalities.
+
+
+
+
+
+
