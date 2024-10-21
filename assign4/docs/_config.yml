@@ -1,0 +1,14 @@
+title: "Exploring U.S. Federal Holidays"
+description: A simple Jekyll website with minimal configuration
+theme: minima
+markdown: kramdown
+plugins:
+  - jekyll-feed
+  - jekyll-seo-tag
+exclude:
+  - Gemfile
+  - Gemfile.lock
+  - node_modules
+  - vendor
+  - .gitignore
+  - README.md
