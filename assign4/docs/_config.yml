@@ -2,6 +2,8 @@ title: "Exploring U.S. Federal Holidays"
 description: A simple Jekyll website with minimal configuration
 theme: minima
 markdown: kramdown
+sass:
+  style: compressed
 plugins:
   - jekyll-feed
   - jekyll-seo-tag
