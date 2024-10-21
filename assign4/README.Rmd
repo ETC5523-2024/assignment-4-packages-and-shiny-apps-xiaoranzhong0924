@@ -1,3 +1,4 @@
+
 ---
 output: github_document
 ---
@@ -13,89 +14,58 @@ knitr::opts_chunk$set(
 )
 ```
 
-# assign4
+# assign4: Exploring U.S. Federal Holidays
 
 <!-- badges: start -->
 <!-- badges: end -->
 
-The goal of assign4 is to ...
+The goal of **assign4** is to provide tools for analyzing U.S. Federal Holidays. This package allows you to explore the historical evolution of established holidays and analyze trends in proposed holidays. It includes a Shiny app to help users interactively explore the dataset.
 
 ## Installation
 
-You can install the development version of assign4 from [GitHub](https://github.com/) with:
+You can install the development version of **assign4** from [GitHub](https://github.com/ETC5523-2024/assignment-4-packages-and-shiny-apps-xiaoranzhong0924) with:
 
-``` r
-# install.packages("pak")
-pak::pak("ETC5523-2024/assignment-4-packages-and-shiny-apps-xiaoranzhong0924")
+```r
+# Install from GitHub using remotes package
+remotes::install_github("ETC5523-2024/assignment-4-packages-and-shiny-apps-xiaoranzhong0924", subdir = "assign4")
 ```
 
 ## Example
 
-This is a basic example which shows you how to solve a common problem:
+Here’s a basic example that shows how to load the package and access some of its functions:
 
 ```{r example}
+# Load the package
 library(assign4)
+
+# Explore the dataset
+head(federal_holidays)
 ```
 
-What is special about using `README.Rmd` instead of just `README.md`? You can include R chunks like so:
+### Shiny App
 
-```{r cars}
-usethis::use_mit_license("Xiaoran Zhong")
-```
+This package includes a Shiny app that allows users to explore U.S. Federal Holidays interactively. To launch the app, use the following command:
 
-You'll still need to render `README.Rmd` regularly, to keep `README.md` up-to-date. `devtools::build_readme()` is handy for this.
+# Launch the Shiny app
+launch_shiny_app()
 
-You can also embed plots, for example:
+The app provides an interface to filter holidays by year, explore trends, and analyze proposed holidays.
+
+### What is special about using `README.Rmd`?
+
+Using `README.Rmd` allows us to include R code chunks directly in the README, which can dynamically generate output (e.g., plots, tables). For example, the following code generates a plot:
 
 ```{r pressure, echo = FALSE}
 plot(pressure)
 ```
 
-In that case, don't forget to commit and push the resulting figure files, so they display on GitHub and CRAN.
-```{r}
-# Create the inst/shiny-app folder
-usethis::use_directory("inst/shiny-app")
+You'll still need to render `README.Rmd` regularly to keep `README.md` up-to-date. The function `devtools::build_readme()` is handy for this.
 
-# Inside inst/shiny-app, create ui.R and server.R for your Shiny app.
+### License
 
-#' Launch the Shiny App
-#'
-#' @export
-launch_shiny_app <- function() {
-  app_dir <- system.file("shiny-app", package = "assign4")
-  shiny::runApp(app_dir, display.mode = "normal")
-}
-```
+This package is released under the MIT License. See the LICENSE file for more details.
 
-```{r}
-# Create the data-raw folder
-usethis::use_data_raw()
+### Additional Resources
 
-# Write your data cleaning script inside data-raw
-```
-```{r}
-# Create a vignette template
-usethis::use_vignette("explore-assign4")
-
-```
-
-```{r}
-#' Launch the Shiny App for Data Exploration
-#'
-#' This function launches a Shiny app included in the package that allows users
-#' to interactively explore the dataset.
-#'
-#' @export
-launch_shiny_app <- function() {
-  app_dir <- system.file("shiny-app", package = "assign4")
-  shiny::runApp(app_dir, display.mode = "normal")
-}
-```
-
-```{r}
-# Generate roxygen2 documentation
-devtools::document()
-```
-
-
-
+- [Documentation](https://your-pkgdown-site-link) (Once the pkgdown site is built, add the link here)
+- [GitHub Repo](https://github.com/ETC5523-2024/assignment-4-packages-and-shiny-apps-xiaoranzhong0924)

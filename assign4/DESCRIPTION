@@ -4,24 +4,24 @@ Version: 0.0.1
 Authors@R: 
     person("Cristina", "Zhong", email = "xzho0140@student.monash.edu", role = c("aut", "cre"),
            comment = c(ORCID = "YOUR-ORCID-ID"))
-Description: This package provides tools for analyzing the historical evolution and trends in U.S. federal holidays, including proposals for new holidays.
+Description: This package provides tools for analyzing U.S. Federal Holidays, including both established and proposed holidays. The package includes a Shiny app for interactive exploration, allowing users to filter holidays by year, analyze holiday trends, and categorize holidays by theme. Additionally, the package offers data cleaning and visualization functions to trace the evolution of federal holidays in the U.S., highlighting key social, political, and cultural shifts.
 License: MIT + file LICENSE
 Encoding: UTF-8
+LazyData: true
 Roxygen: list(markdown = TRUE)
 RoxygenNote: 7.3.2
-Depends: 
-    R (>= 2.10)
-Imports:
-    tidytuesdayR,
+Imports: 
+    shiny,
     tidyverse,
+    plotly,
+    DT,
+    lubridate,
     janitor,
-    rvest,
-    polite,
-    lubridate
-LazyData: true
+    bslib,
+    kableExtra,
+    RColorBrewer
 Suggests: 
     knitr,
     rmarkdown,
-    ggplot2,
     testthat
 VignetteBuilder: knitr
