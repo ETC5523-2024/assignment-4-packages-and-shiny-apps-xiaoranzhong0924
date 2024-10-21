@@ -24,4 +24,4 @@ Suggests:
     rmarkdown,
     testthat
 VignetteBuilder: knitr
-URL:https://github.com/ETC5523-2024/assignment-4-packages-and-shiny-apps-xiaoranzhong0924/tree/main/assign4
+URL:https://etc5523-2024.github.io/assignment-4-packages-and-shiny-apps-xiaoranzhong0924/
