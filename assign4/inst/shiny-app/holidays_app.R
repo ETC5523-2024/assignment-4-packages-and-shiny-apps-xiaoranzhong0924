@@ -135,14 +135,14 @@ ui <- fluidPage(
                 column(4,
                        br(),
                        h2("About This App"),
-                       p("Welcome to the U.S. Federal Holidays Explorer! This app is designed to provide insights into both current and proposed federal holidays in the United States."),
-                       p("You can explore the historical background of holidays, analyze their distribution over time, and even see proposed holidays that aim to recognize key events and figures."),
+                       p("Welcome to the U.S. Federal Holidays Explorer! This app provides insights into both current and proposed federal holidays in the United States."),
+                       p("You can explore the historical background of holidays, analyze their distribution over time, and view proposed holidays that aim to recognize significant events and figures."),
                        br(),
                        img(src = "holidays.jpg", width = "100%", alt = "U.S. Federal Holidays Map")
                 ),
                 column(8,
                        h1("Welcome to the U.S. Federal Holidays Explorer"),
-                       p("This app is your comprehensive guide to U.S. Federal Holidays. Through interactive tables, visualizations, and detailed descriptions, you can explore both the current and proposed federal holidays, their historical significance, and how they impact American life."),
+                       p("This app is your comprehensive guide to U.S. Federal Holidays. Through interactive tables, visualizations, and detailed descriptions, you can explore both current and proposed federal holidays, their historical significance, and their impact on American life."),
                        br(),
                        wellPanel(
                          h3("Quick Insights"),
@@ -153,7 +153,7 @@ ui <- fluidPage(
                                            h4("11 Official Holidays"),
                                            p("The U.S. recognizes 11 federal holidays in 2024, including New Year's Day, Martin Luther King Jr. Day, and Christmas."),
                                            tags$div(class = "quick-fact-content",
-                                                    p("Federal holidays have evolved over time, reflecting the nation's changing values and priorities. Some holidays, like Memorial Day, commemorate the sacrifices of U.S. military personnel, while others, like Independence Day, celebrate the country's founding.")
+                                                    p("Federal holidays have evolved over time, reflecting the nation's changing values and priorities. Some holidays, like Memorial Day, honor the sacrifices of U.S. military personnel, while others, like Independence Day, celebrate the country's founding.")
                                            )
                                   )
                            ),
@@ -173,7 +173,7 @@ ui <- fluidPage(
                                            h4("Historical Insights"),
                                            p("Discover the rich history behind the establishment of U.S. federal holidays."),
                                            tags$div(class = "quick-fact-content",
-                                                    p("Federal holidays often commemorate significant moments in American history, from the founding of the nation to key civil rights movements. Understanding their history offers insights into the values that shaped the nation.")
+                                                    p("Federal holidays often commemorate significant moments in American history, from the founding of the nation to key civil rights movements. Understanding their history offers insights into the values that have shaped the nation.")
                                            )
                                   )
                            )
@@ -188,12 +188,14 @@ ui <- fluidPage(
               sidebarLayout(
                 sidebarPanel(
                   selectInput("month_filter", "Filter by Month:", choices = c("All", unique(federal_holidays_2024$Month))),
+                  helpText("Select a month to filter the list of 2024 federal holidays by month."),
                   br()
                 ),
                 mainPanel(
                   h3("2024 Federal Holidays"),
                   DTOutput("holidays_2024_table"),
                   br(),
+                  p("This table lists the official U.S. federal holidays for 2024. You can use the filter to view holidays for a specific month or view all holidays."),
                   p("Source: LeaveBoard")
                 )
               )
@@ -204,7 +206,8 @@ ui <- fluidPage(
               fluidRow(
                 column(12,
                        h3("Proposed Federal Holidays"),
-                       tableOutput("proposed_holidays_table")
+                       tableOutput("proposed_holidays_table"),
+                       p("This table lists holidays that have been proposed but are not yet officially recognized as federal holidays. The table provides the proposed name, date, category, and additional details.")
                 )
               )
     ),
@@ -213,7 +216,8 @@ ui <- fluidPage(
     nav_menu("Analytics",
              nav_panel("Current Holiday Distribution",
                        h3("Current Holiday Distribution by Month"),
-                       plotlyOutput("current_distribution_plot")
+                       plotlyOutput("current_distribution_plot"),
+                       p("This bar chart shows the distribution of proposed federal holidays by month. It highlights which months are the most common for proposed holidays.")
              ),
              nav_panel("Holiday Establishment Timeline",
                        sidebarLayout(
@@ -224,11 +228,14 @@ ui <- fluidPage(
                                        value = c(min(federal_holidays_clean$year_established, na.rm = TRUE),
                                                  max(federal_holidays_clean$year_established, na.rm = TRUE)),
                                        step = 1, sep = ""),
+                           helpText("Use the slider to select a range of years. The timeline will show the federal holidays established within this range."),
                            br()
                          ),
                          mainPanel(
                            h3("Holiday Establishment Timeline"),
-                           plotlyOutput("holiday_timeline_plot")
+                           plotlyOutput("holiday_timeline_plot"),
+                           p("This timeline shows the establishment of U.S. federal holidays over time. Each point represents a holiday, with the year it was established on the x-axis."),
+                           p("Use the slider to adjust the range of years and explore the history of federal holidays.")
                          )
                        )
              )
