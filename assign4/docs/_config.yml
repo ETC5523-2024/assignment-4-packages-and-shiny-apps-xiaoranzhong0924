@@ -4,6 +4,8 @@ theme: minima
 markdown: kramdown
 sass:
   style: compressed
+  load_paths:
+    - docs/assets/css
 plugins:
   - jekyll-feed
   - jekyll-seo-tag
