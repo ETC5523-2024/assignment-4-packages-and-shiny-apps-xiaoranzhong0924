@@ -1,0 +1,16 @@
+pandoc: '3.2'
+pkgdown: 2.1.1
+pkgdown_sha: ~
+template:
+  bootstrap: 5
+
+url: https://github.com/ETC5523-2024/assignment-4-packages-and-shiny-apps-xiaoranzhong0924/tree/main/assign4
+
+articles:
+  explore-assign4:
+    title: "Exploring U.S. Federal Holidays"
+    path: explore-assign4.html
+    contents:
+      - explore-assign4
+
+last_built: 2024-10-21T07:21Z

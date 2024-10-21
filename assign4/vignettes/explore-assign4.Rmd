@@ -17,7 +17,7 @@ library(ggplot2)   # For plotting
 library(stringr)   # For string manipulation (str_extract, etc.)
 ```
 
-## Introduction
+## Introduction {#introduction}
 
 The **assign4** package provides tools for analyzing and exploring U.S. Federal Holidays, using both established and proposed holiday datasets. This package combines static analysis (from Assignment 2) with an interactive Shiny app that allows users to explore holiday data dynamically.
 
@@ -28,7 +28,7 @@ The package offers functions for data cleaning, visualization, and interactive e
 
 This vignette will guide you through the core features of the package, including the data processing used to clean the datasets and examples of how to use the Shiny app.
 
-## Data Processing and Cleaning
+## Data Processing and Cleaning {#data-processing}
 
 The data used in this package is derived from the **TidyTuesday** project (June 18, 2024). The dataset includes both **federal holidays** and **proposed federal holidays**. Below, we show the full code to clean and process these datasets, which are included in the package as `federal_holidays` and `proposed_federal_holidays`.
 

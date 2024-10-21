@@ -2,8 +2,7 @@ Package: assign4
 Title: Analysis of U.S. Federal Holidays
 Version: 0.0.1
 Authors@R: 
-    person("Cristina", "Zhong", email = "xzho0140@student.monash.edu", role = c("aut", "cre"),
-           comment = c(ORCID = "YOUR-ORCID-ID"))
+    person("Cristina", "Zhong", email = "xzho0140@student.monash.edu", role = c("aut", "cre"))
 Description: This package provides tools for analyzing U.S. Federal Holidays, including both established and proposed holidays. The package includes a Shiny app for interactive exploration, allowing users to filter holidays by year, analyze holiday trends, and categorize holidays by theme. Additionally, the package offers data cleaning and visualization functions to trace the evolution of federal holidays in the U.S., highlighting key social, political, and cultural shifts.
 License: MIT + file LICENSE
 Encoding: UTF-8
@@ -25,3 +24,4 @@ Suggests:
     rmarkdown,
     testthat
 VignetteBuilder: knitr
+URL:https://github.com/ETC5523-2024/assignment-4-packages-and-shiny-apps-xiaoranzhong0924/tree/main/assign4
