@@ -1,25 +1,25 @@
 
 <!-- README.md is generated from README.Rmd. Please edit that file -->
 
-# assign4: Exploring U.S. Federal Holidays
+# Exploring U.S. Federal Holidays
 
 <!-- badges: start -->
 <!-- badges: end -->
 
-The goal of **assign4** is to provide tools for analyzing U.S. Federal
+The goal of this package is to provide tools for analyzing U.S. Federal
 Holidays. This package allows you to explore the historical evolution of
 established holidays and analyze trends in proposed holidays. It
 includes a Shiny app to help users interactively explore the dataset.
 
 ## Installation
 
-You can install the development version of **assign4** from
+You can install the latest version of this package from
 [GitHub](https://github.com/ETC5523-2024/assignment-4-packages-and-shiny-apps-xiaoranzhong0924)
 with:
 
 ``` r
 # Install from GitHub using remotes package
-remotes::install_github("ETC5523-2024/assignment-4-packages-and-shiny-apps-xiaoranzhong0924", subdir = "assign4")
+remotes::install_github("ETC5523-2024/assignment-4-packages-and-shiny-apps-xiaoranzhong0924")
 ```
 
 ## Example
@@ -69,8 +69,6 @@ This package includes a Shiny app that allows users to explore U.S.
 Federal Holidays interactively. To launch the app, use the following
 command:
 
-# Launch the Shiny app
-
 ``` r
 launch_shiny_app()
 ```
@@ -102,8 +100,10 @@ more details.
 
 ### Additional Resources
 
-- [Explore U.S. Federal Holidays
-  article](https://etc5523-2024.github.io/assignment-4-packages-and-shiny-apps-xiaoranzhong0924/articles/explore-assign4.html)
-- [Documentation](https://github.com/ETC5523-2024/assignment-4-packages-and-shiny-apps-xiaoranzhong0924/tree/main/assign4)
+- [Explore U.S. Federal
+  Holidaysarticle](https://etc5523-2024.github.io/assignment-4-packages-and-shiny-apps-xiaoranzhong0924/articles/explore-assign4.html)
+
+- [Documentation](https://github.com/ETC5523-2024/assignment-4-packages-and-shiny-apps-xiaoranzhong0924)
+
 - [GitHub
   Repo](https://github.com/ETC5523-2024/assignment-4-packages-and-shiny-apps-xiaoranzhong0924)

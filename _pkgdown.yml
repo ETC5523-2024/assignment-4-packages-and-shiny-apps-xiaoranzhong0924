@@ -4,12 +4,13 @@ pkgdown_sha: ~
 template:
   bootstrap: 5
 
-url: https://etc5523-2024.github.io/assignment-4-packages-and-shiny-apps-xiaoranzhong0924/
+url: https://etc5523-2024.github.io/assignment-4-packages-and-shiny-apps-xiaoranzhong0924
+base_url: /assignment-4-packages-and-shiny-apps-xiaoranzhong0924
 
 articles:
   explore-assign4:
     title: "Exploring U.S. Federal Holidays"
-    path: explore-assign4.html
+    path: articles/explore-assign4.html
     contents:
       - explore-assign4
 
