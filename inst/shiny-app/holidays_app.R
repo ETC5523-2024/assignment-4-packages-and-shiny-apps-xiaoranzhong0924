@@ -8,8 +8,28 @@ library(bslib)
 library(fontawesome)
 library(wesanderson)
 library(RColorBrewer)
+library(assign4)
 
-# Step 1: Clean and process the 'federal_holidays' dataset
+#' Clean and process the 'federal_holidays' dataset
+federal_holidays_clean <- federal_holidays %>%
+  janitor::clean_names() %>%
+  mutate(
+    year_established = as.integer(year_established),
+    date_established = lubridate::mdy(date_established),
+    details = stringr::str_remove_all(details, "\\[\\d+\\]")
+  )
+#'
+#' This dataset contains cleaned data on U.S. federal holidays, with appropriate
+#' formatting of column names and removal of unnecessary characters from the 'details' column.
+#'
+#' @format A tibble with columns:
+#' \describe{
+#'   \item{year_established}{Year the holiday was established (integer).}
+#'   \item{date_established}{Date the holiday was officially established (date).}
+#'   \item{details}{Additional details about the holiday (string).}
+#' }
+#' @examples
+#' head(federal_holidays_clean)
 federal_holidays_clean <- federal_holidays %>%
   janitor::clean_names() %>%
   mutate(
@@ -18,7 +38,20 @@ federal_holidays_clean <- federal_holidays %>%
     details = stringr::str_remove_all(details, "\\[\\d+\\]")
   )
 
-# Step 2: Clean and process the 'proposed_federal_holidays' dataset
+#' Cleaned Proposed Federal Holidays Dataset
+#'
+#' This dataset contains cleaned data on proposed U.S. federal holidays, with start and end dates extracted
+#' and unnecessary characters removed from 'date_definition' and 'details' columns.
+#'
+#' @format A tibble with columns:
+#' \describe{
+#'   \item{start_date}{Start date of the proposed holiday (string).}
+#'   \item{end_date}{End date of the proposed holiday (string). If not provided, it defaults to the start date.}
+#'   \item{details}{Additional details about the proposed holiday (string).}
+#'   \item{month}{Month of the start date (string).}
+#' }
+#' @examples
+#' head(proposed_federal_holidays_clean)
 proposed_federal_holidays_clean <- proposed_federal_holidays %>%
   janitor::clean_names() %>%
   mutate(
@@ -33,7 +66,17 @@ proposed_federal_holidays_clean <- proposed_federal_holidays %>%
     month = str_extract(start_date, "^[A-Za-z]+")  # Extract month from start date
   )
 
-# Step 3: Categorize proposed holidays by theme
+#' Categorized Proposed Federal Holidays
+#'
+#' This dataset categorizes proposed federal holidays into themes based on their descriptions.
+#' Categories include "Cultural Recognition", "Environmental", "Political", "Patriotic", and "Other".
+#'
+#' @format A tibble with columns:
+#' \describe{
+#'   \item{category}{Category of the proposed holiday, based on details (string).}
+#' }
+#' @examples
+#' head(proposed_category)
 proposed_category <- proposed_federal_holidays_clean %>%
   mutate(category = case_when(
     str_detect(details, "Indigenous|Native|Cesar Chavez|Rosa Parks|Harriet Tubman|Malcolm X|Susan B. Anthony") ~ "Cultural Recognition",
@@ -43,7 +86,19 @@ proposed_category <- proposed_federal_holidays_clean %>%
     TRUE ~ "Other"
   ))
 
-# Define the 2024 Federal Holidays data (used in UI)
+#' U.S. Federal Holidays for 2024
+#'
+#' A tibble containing the list of official U.S. federal holidays for the year 2024.
+#'
+#' @format A tibble with columns:
+#' \describe{
+#'   \item{Holiday}{Name of the holiday (string).}
+#'   \item{Date}{Date of the holiday (string).}
+#'   \item{Day}{Day of the week (string).}
+#'   \item{Month}{Month of the holiday (string).}
+#' }
+#' @examples
+#' head(federal_holidays_2024)
 federal_holidays_2024 <- tibble(
   Holiday = c("New Year's Day", "Martin Luther King, Jr. Day", "Presidents Day",
               "Memorial Day", "Juneteenth", "Independence Day", "Labor Day",
@@ -126,7 +181,7 @@ ui <- fluidPage(
       }
     "))
   ),
-
+  
   # Use navset_pill_list for pill-style navigation
   navset_pill_list(
     # Home tab
@@ -182,7 +237,7 @@ ui <- fluidPage(
                 )
               )
     ),
-
+    
     # 2024 Holidays tab
     nav_panel("2024 Holidays",
               sidebarLayout(
@@ -200,7 +255,7 @@ ui <- fluidPage(
                 )
               )
     ),
-
+    
     # Proposed Holidays tab
     nav_panel("Proposed Holidays",
               fluidRow(
@@ -211,7 +266,7 @@ ui <- fluidPage(
                 )
               )
     ),
-
+    
     # Analytics dropdown menu
     nav_menu("Analytics",
              nav_panel("Current Holiday Distribution",
@@ -241,7 +296,7 @@ ui <- fluidPage(
              )
     )
   ),
-
+  
   footer = tagList(
     hr(),
     p("U.S. Federal Holidays Explorer - Developed with ", icon("heart"), " using Shiny and R.")
@@ -250,15 +305,25 @@ ui <- fluidPage(
 
 # Server
 server <- function(input, output) {
-
-  # Render the 2024 federal holidays table with a filter for month
+  
+  #' Render the 2024 Federal Holidays Table
+  #'
+  #' This function renders a datatable of the official U.S. federal holidays for 2024,
+  #' with an option to filter the table by month.
+  #'
+  #' @param input The input object from the Shiny app, containing the selected month filter.
+  #' @param output The output object where the table will be rendered.
+  #' @param session The session object for the Shiny app.
+  #' @return A datatable of filtered 2024 federal holidays.
+  #' @examples
+  #' output$holidays_2024_table
   output$holidays_2024_table <- renderDT({
     filtered_data <- if (input$month_filter == "All") {
       federal_holidays_2024
     } else {
       federal_holidays_2024 %>% filter(Month == input$month_filter)
     }
-
+    
     datatable(filtered_data,
               options = list(
                 pageLength = 11,
@@ -268,8 +333,14 @@ server <- function(input, output) {
               rownames = FALSE
     )
   })
-
-  # Render the proposed holidays table using kable
+  
+  #' Render the Proposed Holidays Table
+  #'
+  #' This function renders a table of proposed U.S. federal holidays using the `kable` package.
+  #'
+  #' @return A table of proposed U.S. federal holidays, including name, start date, end date, category, and details.
+  #' @examples
+  #' output$proposed_holidays_table
   output$proposed_holidays_table <- function() {
     proposed_category %>%
       select(official_name, start_date, end_date, category, details) %>%
@@ -286,12 +357,18 @@ server <- function(input, output) {
       ) %>%
       row_spec(0, bold = TRUE, background = "#6B4226", color = "white")
   }
-
-  # Render the original holiday distribution plot by month
+  
+  #' Render the Distribution Plot of Proposed Holidays by Month
+  #'
+  #' This function generates a bar chart to visualize the distribution of proposed U.S. federal holidays by month.
+  #'
+  #' @return A Plotly object showing the distribution of proposed holidays by month.
+  #' @examples
+  #' output$current_distribution_plot
   output$current_distribution_plot <- renderPlotly({
     proposed_holidays_by_month <- proposed_federal_holidays_clean %>%
       count(month)  # Count the number of proposed holidays per month
-
+    
     # Create the bar plot using ggplot2
     p <- ggplot(proposed_holidays_by_month, aes(x = month, y = n, fill = month)) +
       geom_bar(stat = "identity", fill = "steelblue") +
@@ -301,15 +378,25 @@ server <- function(input, output) {
       ) +
       theme_minimal() +
       theme(axis.text.x = element_text(angle = 45, hjust = 1))
-
+    
     ggplotly(p)
   })
-
-  # Render the holiday timeline with year range slider
+  
+  #' Render the Holiday Establishment Timeline Plot
+  #'
+  #' This function generates a timeline plot showing the establishment of U.S. federal holidays over time.
+  #' The plot can be filtered by a selected range of years.
+  #'
+  #' @param input The input object from the Shiny app, containing the selected year range.
+  #' @param output The output object where the plot will be rendered.
+  #' @param session The session object for the Shiny app.
+  #' @return A Plotly object showing the timeline of holiday establishments.
+  #' @examples
+  #' output$holiday_timeline_plot
   output$holiday_timeline_plot <- renderPlotly({
     filtered_data <- federal_holidays_clean %>%
       filter(year_established >= input$year_range[1] & year_established <= input$year_range[2])
-
+    
     p <- ggplot(filtered_data, aes(x = year_established, y = reorder(official_name, year_established))) +
       geom_point(color = "blue", size = 3) +
       labs(
@@ -319,7 +406,7 @@ server <- function(input, output) {
         caption = "Source: U.S. Federal Holidays Dataset"
       ) +
       theme_minimal()
-
+    
     ggplotly(p) %>%
       layout(title = list(text = paste0(
         "Establishment of U.S. Federal Holidays",
