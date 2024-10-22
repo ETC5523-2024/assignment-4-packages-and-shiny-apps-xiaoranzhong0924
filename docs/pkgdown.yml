@@ -2,8 +2,8 @@ pandoc: '3.2'
 pkgdown: 2.1.1
 pkgdown_sha: ~
 articles:
-  explore-assign4: explore-assign4.html
-last_built: 2024-10-22T04:18Z
+  test: test.html
+last_built: 2024-10-22T06:01Z
 urls:
   reference: https://etc5523-2024.github.io/assignment-4-packages-and-shiny-apps-xiaoranzhong0924/reference
   article: https://etc5523-2024.github.io/assignment-4-packages-and-shiny-apps-xiaoranzhong0924/articles

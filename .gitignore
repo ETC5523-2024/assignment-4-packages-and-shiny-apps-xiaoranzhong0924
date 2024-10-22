@@ -3,3 +3,7 @@
 .Rbuildignore
 /docs/
 node_modules/
+inst/doc
+/doc/
+/Meta/
+docs

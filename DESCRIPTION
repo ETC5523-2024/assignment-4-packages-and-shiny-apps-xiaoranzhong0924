@@ -14,14 +14,16 @@ Imports:
     tidyverse,
     plotly,
     DT,
-    lubridate,
-    janitor,
-    bslib,
     kableExtra,
-    RColorBrewer
+    lubridate,
+    bslib,
+    fontawesome,
+    wesanderson,
+    RColorBrewer,
+    janitor
 Suggests: 
     knitr,
     rmarkdown,
     testthat
 VignetteBuilder: knitr
-URL:https://etc5523-2024.github.io/assignment-4-packages-and-shiny-apps-xiaoranzhong0924/
+URL: https://etc5523-2024.github.io/assignment-4-packages-and-shiny-apps-xiaoranzhong0924/

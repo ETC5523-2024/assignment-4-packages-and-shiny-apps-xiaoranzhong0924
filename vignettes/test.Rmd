@@ -167,5 +167,3 @@ This plot shows that significant moments in U.S. history, such as the labor move
 ## Conclusion
 
 The **assign4** package offers a comprehensive set of tools for exploring U.S. federal holidays. By combining static analysis with interactive features in the Shiny app, this package provides users with a deeper understanding of how holidays reflect broader social and political movements in the U.S.
-
-For more information, refer to the [package documentation](https://your-pkgdown-site-link) and the interactive [Shiny app](https://your-shiny-app-link).

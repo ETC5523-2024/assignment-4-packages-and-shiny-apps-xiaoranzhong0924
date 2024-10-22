@@ -100,10 +100,5 @@ more details.
 
 ### Additional Resources
 
-- [Explore U.S. Federal
-  Holidaysarticle](https://etc5523-2024.github.io/assignment-4-packages-and-shiny-apps-xiaoranzhong0924/articles/explore-assign4.html)
-
-- [Documentation](https://github.com/ETC5523-2024/assignment-4-packages-and-shiny-apps-xiaoranzhong0924)
-
 - [GitHub
   Repo](https://github.com/ETC5523-2024/assignment-4-packages-and-shiny-apps-xiaoranzhong0924)
