@@ -62,8 +62,6 @@ plot(pressure)
 ```
 ![Graph showing pressure trends over time](man/figures/README-pressure-1.png)
 
-You'll still need to render `README.Rmd` regularly to keep `README.md` up-to-date. The function `devtools::build_readme()` is handy for this.
-
 ### License
 
 This package is released under the MIT License. See the LICENSE file for more details.
