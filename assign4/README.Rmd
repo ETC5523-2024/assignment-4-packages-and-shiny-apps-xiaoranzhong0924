@@ -47,7 +47,9 @@ head(federal_holidays)
 This package includes a Shiny app that allows users to explore U.S. Federal Holidays interactively. To launch the app, use the following command:
 
 # Launch the Shiny app
+```{r, eval = FALSE}
 launch_shiny_app()
+```
 
 The app provides an interface to filter holidays by year, explore trends, and analyze proposed holidays.
 
@@ -55,10 +57,11 @@ The app provides an interface to filter holidays by year, explore trends, and an
 
 Using `README.Rmd` allows us to include R code chunks directly in the README, which can dynamically generate output (e.g., plots, tables). For example, the following code generates a plot:
 
-```{r pressure, echo = FALSE}
+```{r pressure, eval = FALSE}
 plot(pressure)
 ```
-![Graph showing pressure trends over time](reference/figures/README-pressure-1.png)
+![Graph showing pressure trends over time](man/figures/README-pressure-1.png)
+
 You'll still need to render `README.Rmd` regularly to keep `README.md` up-to-date. The function `devtools::build_readme()` is handy for this.
 
 ### License
@@ -67,5 +70,6 @@ This package is released under the MIT License. See the LICENSE file for more de
 
 ### Additional Resources
 
+- [Explore U.S. Federal Holidays article](https://etc5523-2024.github.io/assignment-4-packages-and-shiny-apps-xiaoranzhong0924/articles/explore-assign4.html)
 - [Documentation](https://github.com/ETC5523-2024/assignment-4-packages-and-shiny-apps-xiaoranzhong0924/tree/main/assign4)
 - [GitHub Repo](https://github.com/ETC5523-2024/assignment-4-packages-and-shiny-apps-xiaoranzhong0924)
