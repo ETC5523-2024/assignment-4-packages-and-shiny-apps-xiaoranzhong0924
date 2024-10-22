@@ -5,7 +5,7 @@ markdown: kramdown
 sass:
   style: compressed
   load_paths:
-    - docs/assets/css
+    - assets/css
 plugins:
   - jekyll-feed
   - jekyll-seo-tag
@@ -16,3 +16,4 @@ exclude:
   - vendor
   - .gitignore
   - README.md
+baseurl: "/assignment-4-packages-and-shiny-apps-xiaoranzhong0924"

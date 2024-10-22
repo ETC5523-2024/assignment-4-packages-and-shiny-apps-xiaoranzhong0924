@@ -69,15 +69,34 @@
 <span></span>
 <span><span class="co"># Explore the dataset</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/utils/head.html" class="external-link">head</a></span><span class="op">(</span><span class="va">federal_holidays</span><span class="op">)</span></span>
-<span><span class="co">#&gt; # A tibble: 6 × 6</span></span>
-<span><span class="co">#&gt;   date   date_definition official_name date_established details year_established</span></span>
-<span><span class="co">#&gt;   &lt;chr&gt;  &lt;chr&gt;           &lt;chr&gt;         &lt;date&gt;           &lt;chr&gt;              &lt;int&gt;</span></span>
-<span><span class="co">#&gt; 1 Janua… fixed date      New Year's D… 1870-06-28       "Celeb…             1870</span></span>
-<span><span class="co">#&gt; 2 Janua… 3rd monday      Birthday of … 1983-11-02       "Honor…             1983</span></span>
-<span><span class="co">#&gt; 3 Febru… 3rd monday      Washington's… NA               "Honor…             1879</span></span>
-<span><span class="co">#&gt; 4 May 2… last monday     Memorial Day  NA               "Honor…             1968</span></span>
-<span><span class="co">#&gt; 5 June … fixed date      Juneteenth N… 2021-06-17       "Comme…             2021</span></span>
-<span><span class="co">#&gt; 6 July 4 fixed date      Independence… NA               "Celeb…             1870</span></span></code></pre></div>
+<span><span class="co">#&gt;             date date_definition                        official_name</span></span>
+<span><span class="co">#&gt; 1      January 1      fixed date                       New Year's Day</span></span>
+<span><span class="co">#&gt; 2  January 15–21      3rd monday  Birthday of Martin Luther King, Jr.</span></span>
+<span><span class="co">#&gt; 3 February 15–21      3rd monday                Washington's Birthday</span></span>
+<span><span class="co">#&gt; 4      May 25–31     last monday                         Memorial Day</span></span>
+<span><span class="co">#&gt; 5        June 19      fixed date Juneteenth National Independence Day</span></span>
+<span><span class="co">#&gt; 6         July 4      fixed date                     Independence Day</span></span>
+<span><span class="co">#&gt;   date_established</span></span>
+<span><span class="co">#&gt; 1       1870-06-28</span></span>
+<span><span class="co">#&gt; 2       1983-11-02</span></span>
+<span><span class="co">#&gt; 3             &lt;NA&gt;</span></span>
+<span><span class="co">#&gt; 4             &lt;NA&gt;</span></span>
+<span><span class="co">#&gt; 5       2021-06-17</span></span>
+<span><span class="co">#&gt; 6             &lt;NA&gt;</span></span>
+<span><span class="co">#&gt;                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        details</span></span>
+<span><span class="co">#&gt; 1                                                                                                                                                                                                      Celebrates the beginning of the Gregorian calendar year. Festivities include counting down to 12:00 midnight on the preceding night, New Year's Eve, often with fireworks displays and parties. The ball drop at Times Square in New York City, broadcast live on television nationwide, has become a national New Year's festivity. Serves as the traditional end of the Christmas and holiday season.</span></span>
+<span><span class="co">#&gt; 2                                                                                                                                                                                                       Honors Dr. Martin Luther King Jr., a civil rights leader who was born on January 15, 1929. Some municipalities hold parades, and since the 1994 King Holiday and Service Act, it has become a day of citizen action volunteer service, sometimes referred to as the MLK Day of Service. The holiday is observed on the third Monday of January, and is combined with other holidays in several states.</span></span>
+<span><span class="co">#&gt; 3 Honors George Washington, Founding Father, commander of the Continental Army, and the first U.S. president, who was born on February 22, 1732. In 1968, the Uniform Monday Holiday Act shifted the date of the commemoration from February 22 to the third Monday in February, meaning the observed holiday never falls on Washington's actual birthday. Because of this, combined with the fact that Abraham Lincoln's birthday falls on February 12, many now refer to this holiday as "Presidents' Day" and consider it a day honoring all American presidents. The official name has never been changed.</span></span>
+<span><span class="co">#&gt; 4                                                                                                                                                                                                                                                                                             Honors U.S. military personnel who have fought and died while serving in the United States Armed Forces. Many municipalities hold parades with marching bands and an overall military theme, and the day marks the unofficial beginning of the summer season. The holiday is observed on the last Monday in May.</span></span>
+<span><span class="co">#&gt; 5                                                                                                                                                                                                              Commemorates the emancipation of enslaved people in the United States on the anniversary of the 1865 date when emancipation was announced in Galveston, Texas. Celebratory traditions often include readings of the Emancipation Proclamation, singing traditional songs, rodeos, street fairs, family reunions, cookouts, park parties, historical reenactments, and Miss Juneteenth contests.</span></span>
+<span><span class="co">#&gt; 6                                                                                                                                                                                                                                                                                                                                       Celebrates the 1776 adoption of the Declaration of Independence from British rule. Parades, picnics, and cookouts are held during the day and fireworks are set off at night. On the day before this holiday, the stock market trading session ends three hours early.</span></span>
+<span><span class="co">#&gt;   year_established</span></span>
+<span><span class="co">#&gt; 1             1870</span></span>
+<span><span class="co">#&gt; 2             1983</span></span>
+<span><span class="co">#&gt; 3             1879</span></span>
+<span><span class="co">#&gt; 4             1968</span></span>
+<span><span class="co">#&gt; 5             2021</span></span>
+<span><span class="co">#&gt; 6             1870</span></span></code></pre></div>
 <div class="section level3">
 <h3 id="shiny-app">Shiny App<a class="anchor" aria-label="anchor" href="#shiny-app"></a>
 </h3>
@@ -99,7 +118,7 @@
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot</a></span><span class="op">(</span><span class="va">pressure</span><span class="op">)</span></span></code></pre></div>
 <figure><img src="reference/figures/README-pressure-1.png" alt="Graph showing pressure trends over time"><figcaption aria-hidden="true">
 Graph showing pressure trends over time
-</figcaption></figure><p>You’ll still need to render <code>README.Rmd</code> regularly to keep <code>README.md</code> up-to-date. The function <code><a href="https://devtools.r-lib.org/reference/build_rmd.html" class="external-link">devtools::build_readme()</a></code> is handy for this.</p>
+</figcaption></figure>
 </div>
 <div class="section level3">
 <h3 id="license">License<a class="anchor" aria-label="anchor" href="#license"></a>
