@@ -1,0 +1,171 @@
+---
+title: "Exploring U.S. Federal Holidays with assign4"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{Exploring U.S. Federal Holidays Package}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r setup, include = FALSE}
+# Load necessary packages and data
+library(assign4)   # Load the package
+library(dplyr)     # For data manipulation
+library(janitor)   # For cleaning column names
+library(lubridate) # For working with dates
+library(ggplot2)   # For plotting
+library(stringr)   # For string manipulation (str_extract, etc.)
+```
+
+## Introduction {#introduction}
+
+The **assign4** package provides tools for analyzing and exploring U.S. Federal Holidays, using both established and proposed holiday datasets. This package combines static analysis (from Assignment 2) with an interactive Shiny app that allows users to explore holiday data dynamically.
+
+The package offers functions for data cleaning, visualization, and interactive exploration of federal holidays, with a particular focus on:
+- Historical trends in holiday creation.
+- Thematic categorization of proposed holidays.
+- Interactive exploration of holiday data.
+
+This vignette will guide you through the core features of the package, including the data processing used to clean the datasets and examples of how to use the Shiny app.
+
+## Data Processing and Cleaning {#data-processing}
+
+The data used in this package is derived from the **TidyTuesday** project (June 18, 2024). The dataset includes both **federal holidays** and **proposed federal holidays**. Below, we show the full code to clean and process these datasets, which are included in the package as `federal_holidays` and `proposed_federal_holidays`.
+
+### Federal Holidays Dataset Processing
+
+The **federal_holidays** dataset contains information about established U.S. federal holidays, including their names, establishment dates, and other details. Here's how the data was cleaned:
+
+```{r federal-holidays-cleaning, eval=TRUE}
+# Load the raw dataset (TidyTuesday data or local file in actual use)
+# tuesdata <- tidytuesdayR::tt_load('2024-06-18')
+# federal_holidays <- tuesdata$federal_holidays
+
+# For the vignette, we'll assume the dataset is already included in the package
+data(federal_holidays)
+
+# Clean the dataset
+federal_holidays_clean <- federal_holidays %>%
+  janitor::clean_names() %>%
+  mutate(
+    year_established = as.integer(year_established),
+    date_established = lubridate::mdy(date_established),
+    details = stringr::str_remove_all(details, "\\[\\d+\\]")
+  )
+
+# View the first few rows of the cleaned dataset
+head(federal_holidays_clean)
+```
+
+### Proposed Federal Holidays Dataset Processing
+
+The **proposed_federal_holidays** dataset includes proposals for new U.S. federal holidays, along with details about the proposed dates and the reasons for the proposals.
+
+```{r proposed-holidays-cleaning, eval=TRUE}
+# Load the proposed federal holidays dataset
+# proposed_federal_holidays <- tuesdata$proposed_federal_holidays
+
+# For the vignette, we'll assume the dataset is already included in the package
+data(proposed_federal_holidays)
+
+# Clean the dataset
+proposed_federal_holidays_clean <- proposed_federal_holidays %>%
+  janitor::clean_names() %>%
+  mutate(
+    start_date = str_extract(date, "^[A-Za-z]+ \\d+"),
+    end_date = str_extract(date, "\\d+$"),
+    end_date = ifelse(is.na(end_date), start_date,
+                      paste(str_extract(start_date, "^[A-Za-z]+"), end_date)),
+    date_definition = stringr::str_remove_all(date_definition, "\\[\\d+\\]"),
+    details = stringr::str_remove_all(details, "\\[\\d+\\]")
+  ) %>%
+  mutate(
+    month = str_extract(start_date, "^[A-Za-z]+")  # Extract month from start date
+  )
+
+# View the first few rows of the cleaned dataset
+head(proposed_federal_holidays_clean)
+```
+
+### Categorizing Proposed Holidays by Theme
+
+To better understand the proposed holidays, we can categorize them by theme. For example, we can group holidays into categories such as **Cultural Recognition**, **Environmental**, **Political**, and **Patriotic**.
+
+```{r proposed-holidays-categorization, eval=TRUE}
+# Categorize proposed holidays by theme
+proposed_category <- proposed_federal_holidays_clean %>%
+  mutate(category = case_when(
+    str_detect(details, "Indigenous|Native|Cesar Chavez|Rosa Parks|Harriet Tubman|Malcolm X|Susan B. Anthony") ~ "Cultural Recognition",
+    str_detect(details, "Environment|Earth|Climate") ~ "Environmental",
+    str_detect(details, "Election|Voting|Democracy|Voter|President|Congress|Act") ~ "Political",
+    str_detect(details, "Flag|September 11|Remembrance|Veterans|Memorial|Patriotic") ~ "Patriotic",
+    TRUE ~ "Other"
+  ))
+
+# Count holidays by category
+holiday_categories <- proposed_category %>%
+  count(category)
+
+# Display the categories
+holiday_categories %>%
+  knitr::kable(col.names = c("Holiday Category", "Count"))
+```
+
+## Key Results from Data Analysis
+
+The timeline of U.S. federal holidays reveals that many holidays were introduced during times of significant social or political change. For example, holidays like **Labor Day** (1894) arose during the industrial labor movement, while **Martin Luther King Jr. Day** (1983) highlights the nation's growing recognition of civil rights.
+
+### Table: Recent Federal Holidays
+
+This table shows the most recent U.S. federal holidays:
+
+```{r table-recent-holidays, eval=TRUE}
+federal_holidays_clean %>%
+  arrange(desc(year_established)) %>%
+  select(official_name, year_established) %>%
+  head(5) %>%
+  knitr::kable(col.names = c("Holiday Name", "Year Established"))
+```
+
+The most recent addition to the federal holiday calendar is **Juneteenth National Independence Day**, established in 2021.
+
+## Using the Shiny App
+
+One of the key features of **assign4** is the Shiny app, which allows users to explore U.S. federal holidays interactively.
+
+To launch the Shiny app, use the following command:
+
+```{r, eval = FALSE}
+# Launch the Shiny app
+launch_shiny_app()
+```
+
+### Features of the Shiny App:
+
+1. **2024 Federal Holidays**: View a table of the official U.S. federal holidays for 2024, with the ability to filter by month.
+2. **Proposed Federal Holidays**: Explore proposed holidays, categorized by theme (e.g., cultural recognition, environmental, political).
+3. **Analytics**: Visualize the timeline of holiday establishment and analyze the distribution of proposed holidays by month.
+
+## Example: Holiday Trends
+
+The following plot shows the historical timeline of U.S. federal holidays, revealing how holidays cluster around key social and political movements.
+
+```{r fig-timeline-established-holidays, eval=TRUE, fig.cap="Establishment of U.S. Federal Holidays", fig.align='center'}
+ggplot(federal_holidays_clean, aes(x = year_established, y = reorder(official_name, year_established))) +
+  geom_point(color = "blue", size = 3) +
+  labs(
+    title = "Establishment of U.S. Federal Holidays",
+    x = "Year Established",
+    y = "Holiday",
+    caption = "Source: U.S. Federal Holidays Dataset"
+  ) +
+  theme_minimal()
+```
+
+This plot shows that significant moments in U.S. history, such as the labor movement and civil rights movement, are often marked by the establishment of federal holidays.
+
+## Conclusion
+
+The **assign4** package offers a comprehensive set of tools for exploring U.S. federal holidays. By combining static analysis with interactive features in the Shiny app, this package provides users with a deeper understanding of how holidays reflect broader social and political movements in the U.S.
+
+For more information, refer to the [package documentation](https://your-pkgdown-site-link) and the interactive [Shiny app](https://your-shiny-app-link).
